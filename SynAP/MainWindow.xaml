@@ -4,9 +4,110 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SynAP"
+        xmlns:control="clr-namespace:SynAP.Controls"
+        xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="SynAP Settings"
+        Width="800" Height="700"
+        SizeToContent="Height" WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
     <Grid>
-        
+        <Menu VerticalAlignment="Top" Background="White">
+            <MenuItem Header="Menu">
+                <MenuItem Header="About"/>
+                <MenuItem Header="Load settings..." Click="LoadDialog"/>
+                <MenuItem Header="Save settings..." Click="SaveDialog"/>
+                <MenuItem Header="Save defaults"/>
+                <MenuItem Header="Exit"/>
+            </MenuItem>
+        </Menu>
+        <TabControl Margin="0,18">
+            <TabItem Header="Settings">
+                <Grid>
+                    <StackPanel Margin="0,0,0,44">
+                        <GroupBox Header="Screen Bounds">
+                            <Grid x:Name="ScreenBounds">
+                                <control:MapArea x:Name="ScreenMapArea" Height="150" Margin="0,0,0,72"/>
+                                <GroupBox Header="Settings" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+                                    <StackPanel Orientation="Horizontal" Margin="0,1,0,-1">
+                                        <StackPanel.Resources>
+                                            <Style TargetType="GroupBox">
+                                                <Setter Property="Height" Value="50"/>
+                                                <Setter Property="Margin" Value="2.5,0"/>
+                                            </Style>
+                                            <Style TargetType="TextBox">
+                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                                <Setter Property="Height" Value="24"/>
+                                                <Setter Property="Width" Value="100"/>
+                                                <EventSetter Event="TextChanged" Handler="UpdateScreen"/>
+                                            </Style>
+                                        </StackPanel.Resources>
+                                        <GroupBox Header="Width">
+                                            <TextBox x:Name="ScreenWidthBox"/>
+                                        </GroupBox>
+                                        <GroupBox Header="Height">
+                                            <TextBox x:Name="ScreenHeightBox"/>
+                                        </GroupBox>
+                                        <GroupBox Header="Horizontal Offset">
+                                            <TextBox x:Name="ScreenXBox"/>
+                                        </GroupBox>
+                                        <GroupBox Header="Vertical Offset">
+                                            <TextBox x:Name="ScreenYBox"/>
+                                        </GroupBox>
+
+                                    </StackPanel>
+                                </GroupBox>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Header="Touchpad Bounds">
+                            <Grid>
+                                <control:MapArea x:Name="TouchpadMapArea" Height="150" Margin="0,0,0,72"/>
+                                <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderThickness="1" 
+                                        VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                                        Padding="0,0,0,2">
+                                    <StackPanel Orientation="Horizontal" x:Name="TouchpadBounds">
+                                        <StackPanel.Resources>
+                                            <Style TargetType="GroupBox">
+                                                <Setter Property="Height" Value="50"/>
+                                                <Setter Property="Margin" Value="2.5,0"/>
+                                            </Style>
+                                            <Style TargetType="TextBox">
+                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                                <Setter Property="Height" Value="24"/>
+                                                <Setter Property="Width" Value="100"/>
+                                                <EventSetter Event="TextChanged" Handler="UpdateTouchpad"/>
+                                            </Style>
+                                        </StackPanel.Resources>
+                                        <GroupBox Header="Width">
+                                            <TextBox x:Name="TouchpadWidthBox"/>
+                                        </GroupBox>
+                                        <GroupBox Header="Height">
+                                            <TextBox x:Name="TouchpadHeightBox"/>
+                                        </GroupBox>
+                                        <GroupBox Header="Horizontal Offset">
+                                            <TextBox x:Name="TouchpadXBox"/>
+                                        </GroupBox>
+                                        <GroupBox Header="Vertical Offset">
+                                            <TextBox x:Name="TouchpadYBox"/>
+                                        </GroupBox>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </GroupBox>
+                    </StackPanel>
+                    <Grid VerticalAlignment="Bottom" Height="44">
+                        <Button Content="Start" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="24"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Console">
+                <control:Console x:Name="Console" Status="StatusUpdate" Margin="-2"/>
+            </TabItem>
+        </TabControl>
+        <StatusBar VerticalAlignment="Bottom" Height="18" Background="White">
+            <TextBlock x:Name="Status" Margin="0,-2"/>
+        </StatusBar>
     </Grid>
 </Window>
