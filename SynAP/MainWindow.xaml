@@ -14,7 +14,7 @@
     <Grid>
         <Menu VerticalAlignment="Top" Background="White">
             <MenuItem Header="Menu">
-                <MenuItem Header="About"/>
+                <MenuItem Header="About" Click="ShowAbout"/>
                 <MenuItem Header="Load settings..." Click="LoadDialog"/>
                 <MenuItem Header="Save settings..." Click="SaveDialog"/>
                 <MenuItem Header="Save defaults"/>

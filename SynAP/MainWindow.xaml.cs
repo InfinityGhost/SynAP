@@ -175,8 +175,6 @@ namespace SynAP
             }));
         }
 
-        #endregion
-
         private async void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (IsLoaded)
@@ -185,5 +183,13 @@ namespace SynAP
                 await TouchpadMapArea.UpdateCanvas();
             }
         }
+
+        private void ShowAbout(object sender = null, EventArgs e = null)
+        {
+            new Windows.AboutBox().Show();
+        }
+
+        #endregion
+
     }
 }
