@@ -72,7 +72,7 @@ namespace SynAP
 
         #region Main Buttons
 
-        private async void StartDriverButton(object sender = null, EventArgs e = null)
+        private void StartDriverButton(object sender = null, EventArgs e = null)
         {
             if (!Driver.IsActive)
             {
