@@ -50,6 +50,7 @@ namespace SynAP
             ScaleX = ScreenArea.Width / TouchpadArea.Width;
             ScaleY = ScreenArea.Height / TouchpadArea.Height;
             Output?.Invoke(this, "ScaleX,ScaleY:" + $"{ScaleX},{ScaleY}");
+            Output?.Invoke(this, "Device Bounds:" + TouchpadDevice);
 
             IsActive = true;
             Task.Delay(-1);
@@ -89,14 +90,14 @@ namespace SynAP
             {
                 if (API.FingerState.HasFlag(SynFingerFlags.SF_FingerTouch))
                 {
-                    int XPos = Convert.ToInt32((TouchpadDevice.Bounds.Position.X - API.Packet.X - TouchpadArea.Position.X) * ScaleX);
-                    int YPos = Convert.ToInt32((API.Packet.Y - TouchpadArea.Position.Y - TouchpadDevice.Bounds.Position.Y) * ScaleY);
+                    int XPos = Convert.ToInt32((API.Packet.X - TouchpadDevice.X_Lo) * ScaleX);
+                    int YPos = Convert.ToInt32((TouchpadDevice.Y_Hi - API.Packet.Y) * ScaleY);
                     Cursor.Position = new System.Drawing.Point
                     {
                         X = XPos,
                         Y = YPos,
                     };
-                    Status?.Invoke(this, "X,Y:" + "{" + $"{XPos},{YPos}" + "}");
+                    //Status?.Invoke(this, "X,Y:" + "{" + $"{XPos},{YPos}" + "}");
                 }
             }
         }

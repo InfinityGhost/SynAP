@@ -13,8 +13,8 @@
                        FontFamily="Lucida Console">
                 <TextBlock.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Copy all"/>
-                        <MenuItem Header="Clear"/>
+                        <MenuItem Header="Copy all" Click="Copy"/>
+                        <MenuItem Header="Clear" Click="Clear"/>
                     </ContextMenu>
                 </TextBlock.ContextMenu>
             </TextBlock>

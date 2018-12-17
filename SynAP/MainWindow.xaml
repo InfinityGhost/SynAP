@@ -8,8 +8,8 @@
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
         mc:Ignorable="d"
         Title="SynAP Settings"
-        Width="800" Height="700"
-        SizeToContent="Height" WindowStartupLocation="CenterScreen"
+        Width="800" Height="637"
+        SizeToContent="Manual" WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
     <Grid>
         <Menu VerticalAlignment="Top" Background="White">
