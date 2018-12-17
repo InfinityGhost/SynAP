@@ -34,10 +34,7 @@ namespace SynAP
         {
             Console?.Log("Window loaded.");
             Config = LoadDefaultConfig();
-
-            ScreenMapArea.Output += Console.Log;
-            TouchpadMapArea.Output += Console.Log;
-
+            
             API = new API();
             API.Output += Console.Log;
 
