@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using static SynAP.Tools.ReadHelper;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace SynAP
 {
-    public class Configuration 
+    public class Configuration : INotifyPropertyChanged
     {
         public Configuration()
         {
@@ -24,10 +26,38 @@ namespace SynAP
             Screen = screen;
         }
 
-        public Area Touchpad { set; get; }
-        public Area Screen { set; get; }
+        public Area Touchpad
+        {
+            set
+            {
+                _touchpad = value;
+                NotifyPropertyChanged();
+            }
+            get => _touchpad;
+        }
+        private Area _touchpad;
 
-        public bool LockAspectRatio;
+        public Area Screen
+        {
+            set
+            {
+                _touchpad = value;
+                NotifyPropertyChanged();
+            }
+            get => _screen;
+        }
+        private Area _screen;
+
+        public bool LockAspectRatio
+        {
+            set
+            {
+                _lockaspectratio = value;
+                NotifyPropertyChanged();
+            }
+            get => _lockaspectratio;
+        }
+        private bool _lockaspectratio;
 
         #region File Management
 
@@ -55,5 +85,13 @@ namespace SynAP
         }
 
         #endregion
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] string PropertyName = "")
+        {
+            if (PropertyName != null)
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        }
     }
 }
