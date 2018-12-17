@@ -41,7 +41,7 @@ namespace SynAP
         {
             set
             {
-                _touchpad = value;
+                _screen = value;
                 NotifyPropertyChanged();
             }
             get => _screen;
@@ -63,16 +63,15 @@ namespace SynAP
 
         private readonly string Splitter = ":";
 
-        public Task Load(string path)
+        public void Load(string path)
         {
             var file = File.ReadAllLines(path);
             Touchpad = new Area(file.GetProperty("Touchpad"));
             Screen = new Area(file.GetProperty("Desktop"));
             LockAspectRatio = file.GetProperty("LockAspectRatio").ToBool();
-            return Task.CompletedTask;
         }
 
-        public Task Save(string path)
+        public void Save(string path)
         {
             string[] vs =
             {
@@ -81,7 +80,6 @@ namespace SynAP
                 "LockAspectRatio" + Splitter + LockAspectRatio,
             };
             File.WriteAllLines(path, vs);
-            return Task.CompletedTask;
         }
 
         #endregion

@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
 namespace SynAP
 {
-    public class Area
+    public class Area : INotifyPropertyChanged
     {
         public Area()
         {
@@ -48,19 +50,53 @@ namespace SynAP
         /// <summary>
         /// Width of the Area.
         /// </summary>
-        public double Width { set; get; } = 0;
+        public double Width
+        {
+            set
+            {
+                _width = value;
+                NotifyPropertyChanged();
+            }
+            get => _width;
+        }
+        private double _width;
 
         /// <summary>
         /// Height of the Area.
         /// </summary>
-        public double Height { set; get; } = 0;
+        public double Height
+        {
+            set
+            {
+                _height = value;
+                NotifyPropertyChanged();
+            }
+            get => _height;
+        }
+        private double _height;
 
         /// <summary>
         /// Position of the Area, relative to the top left corner.
         /// </summary>
-        public Point Position { set; get; } = new Point(0, 0);
+        public Point Position
+        {
+            set
+            {
+                _position = value;
+                NotifyPropertyChanged();
+            }
+            get => _position;
+        }
+        private Point _position;
 
         public override string ToString() => $"{Width},{Height},{Position.X},{Position.Y}";
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] string PropertyName = "")
+        {
+            if (PropertyName != null)
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        }
     }
 }

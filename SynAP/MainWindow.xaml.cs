@@ -1,8 +1,10 @@
 ﻿using SynAP.Devices;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,7 +23,7 @@ namespace SynAP
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         public MainWindow()
         {
@@ -111,7 +113,16 @@ namespace SynAP
 
         #region File Management
 
-        public Configuration Config { get; set; }
+        public Configuration Config
+        {
+            set
+            {
+                _config = value;
+                NotifyPropertyChanged();
+            }
+            get => _config;
+        }
+        private Configuration _config;
 
         private Configuration LoadDefaultConfig()
         {
@@ -125,9 +136,9 @@ namespace SynAP
             }
         }
 
-        public async void SaveDefaultConfig()
+        public void SaveDefaultConfig()
         {
-            await Config.Save(Info.DefaultConfigPath);
+            Config.Save(Info.DefaultConfigPath);
         }
 
         private void LoadDialog(object sender = null, EventArgs e = null)
@@ -193,5 +204,16 @@ namespace SynAP
 
         #endregion
 
+        #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] string PropertyName = "")
+        {
+            if (PropertyName != null)
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(PropertyName));
+        }
+
+        #endregion
     }
 }
