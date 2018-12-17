@@ -41,7 +41,7 @@ namespace SynAP
 
         #region Methods
 
-        public Task Start()
+        public void Start()
         {
             Output?.Invoke(this, "Starting...");
             API.Device.OnPacket += API_OnPacket;
@@ -53,20 +53,17 @@ namespace SynAP
             Output?.Invoke(this, "Device Bounds:" + TouchpadDevice);
 
             IsActive = true;
-            Task.Delay(-1);
-            return Task.CompletedTask;
         }
 
         private double ScaleX { set; get; }
         private double ScaleY { set; get; }
 
-        public Task Stop()
+        public void Stop()
         {
             API.Device.OnPacket -= API_OnPacket;
             Output?.Invoke(this, "Stopped.");
 
             IsActive = false;
-            return Task.CompletedTask;
         }
 
         private void API_OnPacket()
