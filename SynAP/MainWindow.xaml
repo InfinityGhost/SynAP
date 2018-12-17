@@ -28,7 +28,7 @@
                     <StackPanel Margin="0,0,0,44">
                         <GroupBox Header="Screen Bounds">
                             <Grid x:Name="ScreenBounds">
-                                <control:MapArea x:Name="ScreenMapArea" Height="150" Margin="0,0,0,72"/>
+                                <control:MapArea x:Name="ScreenMapArea" Height="150" Margin="0,0,0,72" ForegroundArea="{Binding Path=Config.Screen}"/>
                                 <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderThickness="1" 
                                         VerticalAlignment="Bottom" HorizontalAlignment="Center"
                                         Padding="0,0,0,2">
@@ -65,7 +65,7 @@
                         </GroupBox>
                         <GroupBox Header="Touchpad Bounds">
                             <Grid>
-                                <control:MapArea x:Name="TouchpadMapArea" Height="150" Margin="0,0,0,72"/>
+                                <control:MapArea x:Name="TouchpadMapArea" Height="150" Margin="0,0,0,72" ForegroundArea="{Binding Path=Config.Touchpad}"/>
                                 <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderThickness="1" 
                                         VerticalAlignment="Bottom" HorizontalAlignment="Center"
                                         Padding="0,0,0,2">

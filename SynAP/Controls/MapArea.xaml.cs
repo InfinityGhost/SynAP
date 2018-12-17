@@ -38,40 +38,41 @@ namespace SynAP.Controls
         {
             set
             {
-                _foregroundarea = value;
-                try
-                {
-                    UpdateCanvas();
-                }
-                catch { }
+                SetValue(ForegroundAreaProperty, value);
+                UpdateCanvas();
             }
-            get => _foregroundarea;
+
+            get => (Area)GetValue(ForegroundAreaProperty);
         }
-        private Area _foregroundarea;
 
         [Bindable(true), Category("Common")]
         public Area BackgroundArea
         {
             set
             {
-                _backgroundarea = value;
-                try
-                {
-                    UpdateCanvas();
-                }
-                catch { }
-
+                SetValue(BackgroundAreaProperty, value);
+                UpdateCanvas();
             }
-            get => _backgroundarea;
+
+            get => (Area)GetValue(BackgroundAreaProperty);
         }
-        private Area _backgroundarea;
-        
+
         private Rectangle foreground;
         private Rectangle background;
 
         #endregion
 
-        private Task CreateCanvasObjects()
+        #region DependencyProperties
+
+        public static readonly DependencyProperty ForegroundAreaProperty = DependencyProperty.Register(
+            "ForegroundArea", typeof(Area), typeof(MapArea));
+
+        public static readonly DependencyProperty BackgroundAreaProperty = DependencyProperty.Register(
+            "BackgroundArea", typeof(Area), typeof(MapArea));
+
+        #endregion
+
+        private void CreateCanvasObjects()
         {
             AreaCanvas.Children.Clear();
 
@@ -92,37 +93,42 @@ namespace SynAP.Controls
             AreaCanvas.Children.Add(background);
 
             Output?.Invoke(this, "Canvas objects created.");
-            return Task.CompletedTask;
         }
 
-        public Task UpdateCanvas()
+        public void UpdateCanvas()
         {
-            double scaleX = this.ActualWidth / BackgroundArea.Width;
-            double scaleY = this.ActualHeight / BackgroundArea.Height;
-            double scale = scaleX;
-            if (scaleX > scaleY)
-                scale = scaleY;
-
-            double width = ForegroundArea.Width;
-            double height = ForegroundArea.Height;
-            Point position = ForegroundArea.Position;
-
-            Point centerOffset = new Point
+            try
             {
-                X = this.ActualWidth / 2.0 - BackgroundArea.Width * scale / 2.0,
-                Y = this.ActualHeight / 2.0 - BackgroundArea.Height * scale / 2.0,
-            };
+                double scaleX = this.ActualWidth / BackgroundArea.Width;
+                double scaleY = this.ActualHeight / BackgroundArea.Height;
+                double scale = scaleX;
+                if (scaleX > scaleY)
+                    scale = scaleY;
 
-            background.Width = BackgroundArea.Width * scale;
-            background.Height = BackgroundArea.Height * scale;
-            MoveObject(background, centerOffset);
+                double width = ForegroundArea.Width;
+                double height = ForegroundArea.Height;
+                Point position = ForegroundArea.Position;
 
-            foreground.Width = ForegroundArea.Width * scale;
-            foreground.Height = ForegroundArea.Height * scale;
-            MoveObject(foreground, new Point(centerOffset.X + ForegroundArea.Position.X * scale, centerOffset.Y + ForegroundArea.Position.Y * scale));
+                Point centerOffset = new Point
+                {
+                    X = this.ActualWidth / 2.0 - BackgroundArea.Width * scale / 2.0,
+                    Y = this.ActualHeight / 2.0 - BackgroundArea.Height * scale / 2.0,
+                };
 
-            Output?.Invoke(this, "Canvas updated.");
-            return Task.CompletedTask;
+                background.Width = BackgroundArea.Width * scale;
+                background.Height = BackgroundArea.Height * scale;
+                MoveObject(background, centerOffset);
+
+                foreground.Width = ForegroundArea.Width * scale;
+                foreground.Height = ForegroundArea.Height * scale;
+                MoveObject(foreground, new Point(centerOffset.X + ForegroundArea.Position.X * scale, centerOffset.Y + ForegroundArea.Position.Y * scale));
+
+                Output?.Invoke(this, "Canvas updated.");
+            }
+            catch
+            {
+                Output?.Invoke(this, "Invalid settings.");
+            }
         }
 
         public Task MoveObject(UIElement obj, Point position)

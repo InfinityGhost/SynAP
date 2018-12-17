@@ -187,12 +187,12 @@ namespace SynAP
             }));
         }
 
-        private async void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (IsLoaded)
             {
-                await ScreenMapArea.UpdateCanvas();
-                await TouchpadMapArea.UpdateCanvas();
+                ScreenMapArea.UpdateCanvas();
+                TouchpadMapArea.UpdateCanvas();
             }
         }
 
