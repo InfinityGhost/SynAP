@@ -84,16 +84,16 @@
                                             </Style>
                                         </StackPanel.Resources>
                                         <GroupBox Header="Width">
-                                            <TextBox x:Name="TouchpadWidthBox" Text="{Binding Path=Width, Mode=TwoWay}"/>
+                                            <TextBox x:Name="TouchpadWidthBox" Text="{Binding Path=Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </GroupBox>
                                         <GroupBox Header="Height">
-                                            <TextBox x:Name="TouchpadHeightBox" Text="{Binding Path=Height, Mode=TwoWay}"/>
+                                            <TextBox x:Name="TouchpadHeightBox" Text="{Binding Path=Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </GroupBox>
                                         <GroupBox Header="Horizontal Offset">
-                                            <TextBox x:Name="TouchpadXBox" Text="{Binding Path=Position.X, Mode=TwoWay}"/>
+                                            <TextBox x:Name="TouchpadXBox" Text="{Binding Path=Position.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </GroupBox>
                                         <GroupBox Header="Vertical Offset">
-                                            <TextBox x:Name="TouchpadYBox" Text="{Binding Path=Position.Y, Mode=TwoWay}"/>
+                                            <TextBox x:Name="TouchpadYBox" Text="{Binding Path=Position.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </GroupBox>
                                     </StackPanel>
                                 </Border>

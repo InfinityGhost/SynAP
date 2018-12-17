@@ -69,6 +69,7 @@
     <Compile Include="Devices\Screen.cs" />
     <Compile Include="Devices\Touchpad.cs" />
     <Compile Include="Driver.cs" />
+    <Compile Include="Point.cs" />
     <Compile Include="Tools\ConvertHelper.cs" />
     <Compile Include="Tools\Info.cs" />
     <Compile Include="Tools\ReadHelper.cs" />

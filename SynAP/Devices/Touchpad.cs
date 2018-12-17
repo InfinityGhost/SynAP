@@ -22,7 +22,7 @@ namespace SynAP.Devices
                 X_Hi = api.GetProperty(SynDeviceProperty.SP_XHiSensor);
                 Y_Lo = api.GetProperty(SynDeviceProperty.SP_YLoSensor);
                 Y_Hi = api.GetProperty(SynDeviceProperty.SP_YHiSensor);
-                Bounds = new Area(X_Hi - X_Lo, Y_Hi - Y_Lo, new System.Windows.Point(X_Lo, Y_Lo));
+                Bounds = new Area(X_Hi - X_Lo, Y_Hi - Y_Lo, new Point(X_Lo, Y_Lo));
             }
             else
                 Bounds = new Area(6143, 6143);
