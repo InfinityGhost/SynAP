@@ -77,14 +77,10 @@ namespace SynAP
             }
             catch(COMException comex)
             {
-                Output?.Invoke(this, comex.ToString());
+                Output?.Invoke(this, $"Synaptics API Exception:" + comex.ErrorCode);
                 return;
             }
             // this tends to throw an exception once in a while
-
-            //Output?.Invoke(this, "Coords:" + $"{API.Packet.X},{API.Packet.Y}");
-
-            // TODO: add cursor positioning
 
             if (Enum.TryParse(API.Packet.FingerState.ToString(), out API.FingerState))
             {

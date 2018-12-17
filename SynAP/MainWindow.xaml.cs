@@ -158,6 +158,7 @@ namespace SynAP
                 try
                 {
                     Config = new Configuration(dialog.FileName);
+                    FetchProperties();
                 }
                 catch
                 {
