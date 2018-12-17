@@ -28,7 +28,6 @@ namespace SynAP
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = Config;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
