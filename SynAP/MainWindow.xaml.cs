@@ -35,6 +35,9 @@ namespace SynAP
             Console?.Log("Window loaded.");
             Config = LoadDefaultConfig();
 
+            ScreenMapArea.Output += Console.Log;
+            TouchpadMapArea.Output += Console.Log;
+
             API = new API();
             API.Output += Console.Log;
 
@@ -76,10 +79,10 @@ namespace SynAP
                 Driver.ScreenArea = Config.Screen;
                 Driver.TouchpadArea = Config.Touchpad;
                 Driver.TouchpadDevice = Touchpad;
-                await Driver.Start();
+                Driver.Start();
             }
             else
-                await Driver.Stop();
+                Driver.Stop();
         }
 
         #endregion
@@ -88,23 +91,11 @@ namespace SynAP
 
         public void UpdateScreen(object sender = null, EventArgs e = null)
         {
-            Config.Screen = new Area
-            {
-                Width = ScreenWidthBox.GetDouble(),
-                Height = ScreenHeightBox.GetDouble(),
-                Position = new Point(ScreenXBox.GetDouble(), ScreenYBox.GetDouble())
-            };
             ScreenMapArea.ForegroundArea = Config.Screen;
         }
 
         public void UpdateTouchpad(object sender = null, EventArgs e = null)
         {
-            Config.Touchpad = new Area
-            {
-                Width = TouchpadWidthBox.GetDouble(),
-                Height = TouchpadHeightBox.GetDouble(),
-                Position = new Point(TouchpadXBox.GetDouble(), TouchpadYBox.GetDouble())
-            };
             TouchpadMapArea.ForegroundArea = Config.Touchpad;
         }
 
