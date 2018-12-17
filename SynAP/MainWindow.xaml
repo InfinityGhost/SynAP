@@ -29,7 +29,7 @@
                             <Grid x:Name="ScreenBounds">
                                 <control:MapArea x:Name="ScreenMapArea" Height="150" Margin="0,0,0,72"/>
                                 <GroupBox Header="Settings" VerticalAlignment="Bottom" HorizontalAlignment="Center">
-                                    <StackPanel Orientation="Horizontal" Margin="0,1,0,-1">
+                                    <StackPanel Orientation="Horizontal" DataContext="{Binding Path=Config.Screen, Mode=TwoWay}">
                                         <StackPanel.Resources>
                                             <Style TargetType="GroupBox">
                                                 <Setter Property="Height" Value="50"/>
@@ -40,20 +40,20 @@
                                                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                                                 <Setter Property="Height" Value="24"/>
                                                 <Setter Property="Width" Value="100"/>
-                                                <EventSetter Event="KeyDown" Handler="UpdateScreen"/>
+                                                <!--<EventSetter Event="KeyDown" Handler="UpdateScreen"/>-->
                                             </Style>
                                         </StackPanel.Resources>
                                         <GroupBox Header="Width">
-                                            <TextBox x:Name="ScreenWidthBox"/>
+                                            <TextBox x:Name="ScreenWidthBox" Text="{Binding Path=Width, Mode=TwoWay}"/>
                                         </GroupBox>
                                         <GroupBox Header="Height">
-                                            <TextBox x:Name="ScreenHeightBox"/>
+                                            <TextBox x:Name="ScreenHeightBox" Text="{Binding Path=Height, Mode=TwoWay}"/>
                                         </GroupBox>
                                         <GroupBox Header="Horizontal Offset">
-                                            <TextBox x:Name="ScreenXBox"/>
+                                            <TextBox x:Name="ScreenXBox" Text="{Binding Path=Position.X, Mode=TwoWay}"/>
                                         </GroupBox>
                                         <GroupBox Header="Vertical Offset">
-                                            <TextBox x:Name="ScreenYBox"/>
+                                            <TextBox x:Name="ScreenYBox" Text="{Binding Path=Position.Y, Mode=TwoWay}"/>
                                         </GroupBox>
 
                                     </StackPanel>
@@ -66,7 +66,7 @@
                                 <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderThickness="1" 
                                         VerticalAlignment="Bottom" HorizontalAlignment="Center"
                                         Padding="0,0,0,2">
-                                    <StackPanel Orientation="Horizontal" x:Name="TouchpadBounds">
+                                    <StackPanel Orientation="Horizontal" x:Name="TouchpadBounds" DataContext="{Binding Path=Config.Touchpad, Mode=TwoWay}">
                                         <StackPanel.Resources>
                                             <Style TargetType="GroupBox">
                                                 <Setter Property="Height" Value="50"/>
@@ -77,20 +77,20 @@
                                                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                                                 <Setter Property="Height" Value="24"/>
                                                 <Setter Property="Width" Value="100"/>
-                                                <EventSetter Event="KeyDown" Handler="UpdateTouchpad"/>
+                                                <!--<EventSetter Event="KeyDown" Handler="UpdateTouchpad"/>-->
                                             </Style>
                                         </StackPanel.Resources>
                                         <GroupBox Header="Width">
-                                            <TextBox x:Name="TouchpadWidthBox"/>
+                                            <TextBox x:Name="TouchpadWidthBox" Text="{Binding Path=Width, Mode=TwoWay}"/>
                                         </GroupBox>
                                         <GroupBox Header="Height">
-                                            <TextBox x:Name="TouchpadHeightBox"/>
+                                            <TextBox x:Name="TouchpadHeightBox" Text="{Binding Path=Height, Mode=TwoWay}"/>
                                         </GroupBox>
                                         <GroupBox Header="Horizontal Offset">
-                                            <TextBox x:Name="TouchpadXBox"/>
+                                            <TextBox x:Name="TouchpadXBox" Text="{Binding Path=Position.X, Mode=TwoWay}"/>
                                         </GroupBox>
                                         <GroupBox Header="Vertical Offset">
-                                            <TextBox x:Name="TouchpadYBox"/>
+                                            <TextBox x:Name="TouchpadYBox" Text="{Binding Path=Position.Y, Mode=TwoWay}"/>
                                         </GroupBox>
                                     </StackPanel>
                                 </Border>

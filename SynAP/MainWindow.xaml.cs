@@ -51,8 +51,6 @@ namespace SynAP
             TouchpadMapArea.BackgroundArea = TouchpadRes;
             ScreenMapArea.ForegroundArea = Config.Screen;
             TouchpadMapArea.ForegroundArea = Config.Touchpad;
-
-            FetchProperties();
         }
 
         #region Properties
@@ -109,19 +107,6 @@ namespace SynAP
             TouchpadMapArea.ForegroundArea = Config.Touchpad;
         }
 
-        public Task FetchProperties()
-        {
-            ScreenWidthBox.Text = Config.Screen.Width.ToString();
-            ScreenHeightBox.Text = Config.Screen.Height.ToString();
-            ScreenXBox.Text = Config.Screen.Position.X.ToString();
-            ScreenYBox.Text = Config.Screen.Position.Y.ToString();
-            TouchpadWidthBox.Text = Config.Touchpad.Width.ToString();
-            TouchpadHeightBox.Text = Config.Touchpad.Height.ToString();
-            TouchpadXBox.Text = Config.Touchpad.Position.X.ToString();
-            TouchpadYBox.Text = Config.Touchpad.Position.Y.ToString();
-            return Task.CompletedTask;
-        }
-
         #endregion
 
         #region File Management
@@ -158,7 +143,6 @@ namespace SynAP
                 try
                 {
                     Config = new Configuration(dialog.FileName);
-                    FetchProperties();
                 }
                 catch
                 {
