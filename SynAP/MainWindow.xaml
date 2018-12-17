@@ -47,16 +47,16 @@
                                             </Style>
                                         </StackPanel.Resources>
                                         <GroupBox Header="Width">
-                                            <TextBox x:Name="ScreenWidthBox" Text="{Binding Path=Width, Mode=TwoWay}"/>
+                                            <TextBox x:Name="ScreenWidthBox" Text="{Binding Path=Width, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
                                         </GroupBox>
                                         <GroupBox Header="Height">
-                                            <TextBox x:Name="ScreenHeightBox" Text="{Binding Path=Height, Mode=TwoWay}"/>
+                                            <TextBox x:Name="ScreenHeightBox" Text="{Binding Path=Height, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
                                         </GroupBox>
                                         <GroupBox Header="Horizontal Offset">
-                                            <TextBox x:Name="ScreenXBox" Text="{Binding Path=Position.X, Mode=TwoWay}"/>
+                                            <TextBox x:Name="ScreenXBox" Text="{Binding Path=Position.X, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
                                         </GroupBox>
                                         <GroupBox Header="Vertical Offset">
-                                            <TextBox x:Name="ScreenYBox" Text="{Binding Path=Position.Y, Mode=TwoWay}"/>
+                                            <TextBox x:Name="ScreenYBox" Text="{Binding Path=Position.Y, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
                                         </GroupBox>
 
                                     </StackPanel>
