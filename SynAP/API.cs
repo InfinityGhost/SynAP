@@ -33,6 +33,8 @@ namespace SynAP
         public SynAPICtrl APICtrl;
         public SynPacketCtrl Packet;
 
+        public SynFingerFlags FingerState;
+
         public bool IsAvailable { private set; get; }
         public int DeviceHandle;
 

@@ -40,7 +40,7 @@
                                                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                                                 <Setter Property="Height" Value="24"/>
                                                 <Setter Property="Width" Value="100"/>
-                                                <EventSetter Event="TextChanged" Handler="UpdateScreen"/>
+                                                <EventSetter Event="KeyDown" Handler="UpdateScreen"/>
                                             </Style>
                                         </StackPanel.Resources>
                                         <GroupBox Header="Width">
@@ -77,7 +77,7 @@
                                                 <Setter Property="VerticalContentAlignment" Value="Center"/>
                                                 <Setter Property="Height" Value="24"/>
                                                 <Setter Property="Width" Value="100"/>
-                                                <EventSetter Event="TextChanged" Handler="UpdateTouchpad"/>
+                                                <EventSetter Event="KeyDown" Handler="UpdateTouchpad"/>
                                             </Style>
                                         </StackPanel.Resources>
                                         <GroupBox Header="Width">
@@ -98,7 +98,9 @@
                         </GroupBox>
                     </StackPanel>
                     <Grid VerticalAlignment="Bottom" Height="44">
-                        <Button Content="Start" VerticalAlignment="Center" HorizontalAlignment="Center" Width="100" Height="24"/>
+                        <Button Content="Start" Click="StartDriverButton"
+                                VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                Width="100" Height="24"/>
                     </Grid>
                 </Grid>
             </TabItem>

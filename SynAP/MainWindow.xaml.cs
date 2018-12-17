@@ -34,13 +34,12 @@ namespace SynAP
             Console?.Log("Window loaded.");
             Config = LoadDefaultConfig();
 
-            ScreenBounds.DataContext = Config.Screen;
-            TouchpadBounds.DataContext = Config.Touchpad;
-
-            TouchpadWidthBox.DataContext = Config.Touchpad;
-
             API = new API();
             API.Output += Console.Log;
+
+            Driver = new Driver(API);
+            Driver.Output += Console.Log;
+            Driver.Status += StatusUpdate;
 
             Screen = new Screen();
             Touchpad = new Touchpad(API);
@@ -62,14 +61,32 @@ namespace SynAP
         private Area TouchpadRes { get; set; }
 
         private API API { get; set; }
+        private Driver Driver { get; set; }
 
         private Screen Screen { get; set; }
         private Touchpad Touchpad { get; set; }
 
         #endregion
 
+        #region Main Buttons
+
+        private async void StartDriverButton(object sender = null, EventArgs e = null)
+        {
+            if (!Driver.IsActive)
+            {
+                Driver.ScreenArea = Config.Screen;
+                Driver.TouchpadArea = Config.Touchpad;
+                Driver.TouchpadDevice = Touchpad;
+                await Driver.Start();
+            }
+            else
+                await Driver.Stop();
+        }
+
+        #endregion
+
         #region Property Updates
-        
+
         public void UpdateScreen(object sender = null, EventArgs e = null)
         {
             Config.Screen = new Area

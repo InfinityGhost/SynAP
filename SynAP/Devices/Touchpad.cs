@@ -18,11 +18,11 @@ namespace SynAP.Devices
         {
             if (api.IsAvailable)
             {
-                int xLo = api.GetProperty(SynDeviceProperty.SP_XLoSensor);
-                int xHi = api.GetProperty(SynDeviceProperty.SP_XHiSensor);
-                int yLo = api.GetProperty(SynDeviceProperty.SP_YLoSensor);
-                int yHi = api.GetProperty(SynDeviceProperty.SP_YHiSensor);
-                Bounds = new Area(xHi - xLo, yHi - yLo);
+                int X_Lo = api.GetProperty(SynDeviceProperty.SP_XLoSensor);
+                int X_Hi = api.GetProperty(SynDeviceProperty.SP_XHiSensor);
+                int Y_Lo = api.GetProperty(SynDeviceProperty.SP_YLoSensor);
+                int Y_Hi = api.GetProperty(SynDeviceProperty.SP_YHiSensor);
+                Bounds = new Area(X_Hi - X_Lo, Y_Hi - Y_Lo, new System.Windows.Point(X_Lo, Y_Lo));
             }
             else
                 Bounds = new Area(6143, 6143);
