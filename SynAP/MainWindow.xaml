@@ -47,16 +47,16 @@
                                             </Style>
                                         </StackPanel.Resources>
                                         <GroupBox Header="Width">
-                                            <TextBox x:Name="ScreenWidthBox" Text="{Binding Path=Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <TextBox Text="{Binding Path=Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </GroupBox>
                                         <GroupBox Header="Height">
-                                            <TextBox x:Name="ScreenHeightBox" Text="{Binding Path=Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <TextBox Text="{Binding Path=Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </GroupBox>
                                         <GroupBox Header="Horizontal Offset">
-                                            <TextBox x:Name="ScreenXBox" Text="{Binding Path=Position.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <TextBox Text="{Binding Path=Position.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </GroupBox>
                                         <GroupBox Header="Vertical Offset">
-                                            <TextBox x:Name="ScreenYBox" Text="{Binding Path=Position.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <TextBox Text="{Binding Path=Position.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </GroupBox>
 
                                     </StackPanel>
@@ -65,7 +65,24 @@
                         </GroupBox>
                         <GroupBox Header="Touchpad Bounds">
                             <Grid>
-                                <control:MapArea x:Name="TouchpadMapArea" Height="150" Margin="0,0,0,72" ForegroundArea="{Binding Path=Config.Touchpad}"/>
+                                <control:MapArea x:Name="TouchpadMapArea" Height="150" Margin="0,0,0,72" ForegroundArea="{Binding Path=Config.Touchpad}">
+                                    <control:MapArea.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Center the area" Click="CenterArea"/>
+                                        </ContextMenu>
+                                    </control:MapArea.ContextMenu>
+
+                                </control:MapArea>
+                                <GroupBox Header="Touchpad Settings" Margin="0,0,0,72" HorizontalAlignment="Right" Padding="2">
+                                    <StackPanel>
+                                        <StackPanel.Resources>
+                                            <Style TargetType="CheckBox">
+                                                <Setter Property="Margin" Value="2.5"/>
+                                            </Style>
+                                        </StackPanel.Resources>
+                                        <CheckBox Content="Lock aspect ratio" IsChecked="{Binding Config.LockAspectRatio}"/>
+                                    </StackPanel>
+                                </GroupBox>
                                 <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderThickness="1" 
                                         VerticalAlignment="Bottom" HorizontalAlignment="Center"
                                         Padding="0,0,0,2">
@@ -90,10 +107,10 @@
                                             <TextBox x:Name="TouchpadHeightBox" Text="{Binding Path=Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </GroupBox>
                                         <GroupBox Header="Horizontal Offset">
-                                            <TextBox x:Name="TouchpadXBox" Text="{Binding Path=Position.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <TextBox Text="{Binding Path=Position.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </GroupBox>
                                         <GroupBox Header="Vertical Offset">
-                                            <TextBox x:Name="TouchpadYBox" Text="{Binding Path=Position.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <TextBox Text="{Binding Path=Position.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                         </GroupBox>
                                     </StackPanel>
                                 </Border>
@@ -113,6 +130,6 @@
         </TabControl>
         <StatusBar VerticalAlignment="Bottom" Height="18" Background="White">
             <TextBlock x:Name="Status" Margin="0,-2"/>
-        </StatusBar>
+        </StatusBar>    
     </Grid>
 </Window>

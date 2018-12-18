@@ -86,14 +86,29 @@ namespace SynAP
 
         #region Property Updates
 
-        public void UpdateScreen(object sender = null, EventArgs e = null)
+        private void UpdateScreen(object sender = null, EventArgs e = null)
         {
             ScreenMapArea.ForegroundArea = Config.Screen;
         }
 
-        public void UpdateTouchpad(object sender = null, EventArgs e = null)
+        private void UpdateTouchpad(object sender = null, EventArgs e = null)
         {
             TouchpadMapArea.ForegroundArea = Config.Touchpad;
+            if (Config.LockAspectRatio)
+            {
+                if (sender == TouchpadHeightBox)
+                    Config.Touchpad.Width = Math.Round(Config.Screen.Width / Config.Screen.Height * Config.Touchpad.Height);
+                else if (sender == TouchpadWidthBox)
+                    Config.Touchpad.Height = Math.Round(Config.Screen.Height / Config.Screen.Width * Config.Touchpad.Width);
+
+            }
+        }
+
+        private void CenterArea(object sender = null, EventArgs e = null)
+        {
+            var area = sender as Controls.MapArea;
+
+
         }
 
         #endregion
