@@ -28,7 +28,15 @@
                     <StackPanel Margin="0,0,0,44">
                         <GroupBox Header="Screen Bounds">
                             <Grid x:Name="ScreenBounds">
-                                <control:MapArea x:Name="ScreenMapArea" Height="150" Margin="0,0,0,72" ForegroundArea="{Binding Path=Config.Screen, Mode=TwoWay}"/>
+                                <control:MapArea x:Name="ScreenMapArea" Height="150" Margin="0,0,0,72" ForegroundArea="{Binding Path=Config.Screen, Mode=TwoWay}">
+                                    <control:MapArea.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Center the area" Click="CenterArea" Tag="Screen"/>
+                                            <MenuItem Header="Center horizontally" Click="CenterHorizontal" Tag="Screen"/>
+                                            <MenuItem Header="Center vertically" Click="CenterVertical" Tag="Screen"/>
+                                        </ContextMenu>
+                                    </control:MapArea.ContextMenu>
+                                </control:MapArea>
                                 <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderThickness="1" 
                                         VerticalAlignment="Bottom" HorizontalAlignment="Center"
                                         Padding="0,0,0,2">
@@ -68,7 +76,9 @@
                                 <control:MapArea x:Name="TouchpadMapArea" Height="150" Margin="0,0,0,72" ForegroundArea="{Binding Path=Config.Touchpad}">
                                     <control:MapArea.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Center the area" Click="CenterArea"/>
+                                            <MenuItem Header="Center the area" Click="CenterArea" Tag="Touchpad"/>
+                                            <MenuItem Header="Center horizontally" Click="CenterHorizontal" Tag="Touchpad"/>
+                                            <MenuItem Header="Center vertically" Click="CenterVertical" Tag="Touchpad"/>
                                         </ContextMenu>
                                     </control:MapArea.ContextMenu>
 

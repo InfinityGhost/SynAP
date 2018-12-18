@@ -106,9 +106,27 @@ namespace SynAP
 
         private void CenterArea(object sender = null, EventArgs e = null)
         {
-            var area = sender as Controls.MapArea;
+            string tag = (string)(sender as Control).Tag;
+            CenterHorizontal(tag);
+            CenterVertical(tag);
+        }
 
+        private void CenterHorizontal(object sender = null, EventArgs e = null) => CenterHorizontal((string)(sender as Control).Tag);
+        private void CenterHorizontal(string tag)
+        {
+            if (tag == "Screen")
+                Config.Screen.Position.X = (Screen.Bounds.Width - Config.Screen.Width) / 2;
+            if (tag == "Touchpad")
+                Config.Touchpad.Position.X = (Touchpad.Bounds.Width - Config.Touchpad.Width) / 2;
+        }
 
+        private void CenterVertical(object sender = null, EventArgs e = null) => CenterVertical((string)(sender as Control).Tag);
+        private void CenterVertical(string tag)
+        {
+            if (tag == "Screen")
+                Config.Screen.Position.Y = (Screen.Bounds.Height - Config.Screen.Height) / 2 ;
+            if (tag == "Touchpad")
+                Config.Touchpad.Position.Y = (Touchpad.Bounds.Height - Config.Touchpad.Height) / 2;
         }
 
         #endregion
