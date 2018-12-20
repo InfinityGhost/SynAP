@@ -29,14 +29,14 @@ namespace SynAP
 
         public event EventHandler<string> Output;
 
-        public SynDeviceCtrl Device;
-        public SynAPICtrl APICtrl;
-        public SynPacketCtrl Packet;
+        public SynDeviceCtrl Device { private set; get; }
+        public SynAPICtrl APICtrl { private set; get; }
+        public SynPacketCtrl Packet { private set; get; }
 
-        public SynFingerFlags FingerState;
+        public SynFingerFlags FingerState { private set; get; }
 
         public bool IsAvailable { private set; get; }
-        public int DeviceHandle;
+        public int DeviceHandle { private set; get; }
 
         public Task Init()
         {
@@ -50,10 +50,6 @@ namespace SynAP
             return Task.CompletedTask;
         }
 
-        public int GetProperty(SynDeviceProperty property)
-        {
-            return Device.GetLongProperty(property);
-        }
-
+        public int GetProperty(SynDeviceProperty property) => Device.GetLongProperty(property);
     }
 }
