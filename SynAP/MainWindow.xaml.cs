@@ -91,16 +91,20 @@ namespace SynAP
             ScreenMapArea.ForegroundArea = Config.Screen;
         }
 
-        private void UpdateTouchpad(object sender = null, EventArgs e = null)
+        private void UpdateTouchpad(object sender = null, TextChangedEventArgs e = null)
         {
             TouchpadMapArea.ForegroundArea = Config.Touchpad;
             if (Config.LockAspectRatio)
             {
+                var box = sender as TextBox;
+                var caret = box.CaretIndex;
+                
                 if (sender == TouchpadHeightBox)
                     Config.Touchpad.Width = Math.Round(Config.Screen.Width / Config.Screen.Height * Config.Touchpad.Height);
                 else if (sender == TouchpadWidthBox)
                     Config.Touchpad.Height = Math.Round(Config.Screen.Height / Config.Screen.Width * Config.Touchpad.Width);
 
+                box.CaretIndex = caret;
             }
         }
 
