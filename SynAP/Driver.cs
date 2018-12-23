@@ -43,7 +43,7 @@ namespace SynAP
 
         public void Start()
         {
-            if (!API.IsAvailable)
+            if (API.IsAvailable)
             {
                 Output?.Invoke(this, "Starting...");
                 API.Device.OnPacket += API_OnPacket;
