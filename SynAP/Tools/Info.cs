@@ -18,7 +18,7 @@ namespace SynAP
         /// <summary>
         /// This project's Github link.
         /// </summary>
-        public static string GitHub = "N/A";
+        public static string GitHub = @"https://github.com/InfinityGhost/SynAP";
 
         public class Discord
         {
