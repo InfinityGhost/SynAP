@@ -42,7 +42,7 @@ namespace SynAP.Controls
             }));
             return Task.CompletedTask;
         }
-        public async void Log(object sender, string text) => await Log(sender.GetType().Name + ":" + text);
+        public async void Log(object sender, string text) => await Log(sender.GetType().Name + " - " + text);
 
         public Task Clear()
         {

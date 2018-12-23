@@ -11,7 +11,7 @@
         Title="SynAP Settings"
         Width="800" Height="637"
         SizeToContent="Manual" WindowStartupLocation="CenterScreen"
-        Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
+        Loaded="Window_Loaded" SizeChanged="Window_SizeChanged" StateChanged="Window_StateChanged">
     <Grid DataContext="{Binding ElementName=Root}">
         <Menu VerticalAlignment="Top" Background="White">
             <MenuItem Header="Menu">
@@ -24,11 +24,11 @@
         </Menu>
         <TabControl Margin="0,18">
             <TabItem Header="Settings">
-                <Grid>
-                    <StackPanel Margin="0,0,0,44">
+                <Grid x:Name="SettingsPanel">
+                    <StackPanel>
                         <GroupBox Header="Screen Bounds">
-                            <Grid x:Name="ScreenBounds">
-                                <control:MapArea x:Name="ScreenMapArea" Height="150" Margin="0,0,0,72" ForegroundArea="{Binding Path=Config.Screen, Mode=TwoWay}">
+                            <Grid x:Name="ScreenBoundsGrid">
+                                <control:MapArea x:Name="ScreenMapArea" Margin="0,0,0,72" ForegroundArea="{Binding Path=Config.Screen, Mode=TwoWay}">
                                     <control:MapArea.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Center the area" Click="CenterArea" Tag="Screen"/>
@@ -72,8 +72,8 @@
                             </Grid>
                         </GroupBox>
                         <GroupBox Header="Touchpad Bounds">
-                            <Grid>
-                                <control:MapArea x:Name="TouchpadMapArea" Height="150" Margin="0,0,0,72" ForegroundArea="{Binding Path=Config.Touchpad}">
+                            <Grid x:Name="TouchpadBoundsGrid">
+                                <control:MapArea x:Name="TouchpadMapArea" Margin="0,0,0,72" ForegroundArea="{Binding Path=Config.Touchpad}">
                                     <control:MapArea.ContextMenu>
                                         <ContextMenu>
                                             <MenuItem Header="Center the area" Click="CenterArea" Tag="Touchpad"/>
@@ -96,7 +96,7 @@
                                 <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderThickness="1" 
                                         VerticalAlignment="Bottom" HorizontalAlignment="Center"
                                         Padding="0,0,0,2">
-                                    <StackPanel Orientation="Horizontal" x:Name="TouchpadBounds" DataContext="{Binding Path=Config.Touchpad, Mode=TwoWay}">
+                                    <StackPanel Orientation="Horizontal" DataContext="{Binding Path=Config.Touchpad, Mode=TwoWay}">
                                         <StackPanel.Resources>
                                             <Style TargetType="GroupBox">
                                                 <Setter Property="Height" Value="50"/>
@@ -127,11 +127,6 @@
                             </Grid>
                         </GroupBox>
                     </StackPanel>
-                    <Grid VerticalAlignment="Bottom" Height="44">
-                        <Button Content="Start" Click="StartDriverButton"
-                                VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                Width="100" Height="24"/>
-                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Console">

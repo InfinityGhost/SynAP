@@ -43,16 +43,19 @@ namespace SynAP
 
         public void Start()
         {
-            Output?.Invoke(this, "Starting...");
-            API.Device.OnPacket += API_OnPacket;
-            Output?.Invoke(this, "Device hooked.");
+            if (!API.IsAvailable)
+            {
+                Output?.Invoke(this, "Starting...");
+                API.Device.OnPacket += API_OnPacket;
+                Output?.Invoke(this, "Device hooked.");
 
-            ScaleX = ScreenArea.Width / TouchpadArea.Width;
-            ScaleY = ScreenArea.Height / TouchpadArea.Height;
-            Output?.Invoke(this, "ScaleX,ScaleY:" + $"{ScaleX},{ScaleY}");
-            Output?.Invoke(this, "Device Bounds:" + TouchpadDevice);
+                ScaleX = ScreenArea.Width / TouchpadArea.Width;
+                ScaleY = ScreenArea.Height / TouchpadArea.Height;
+                Output?.Invoke(this, "ScaleX,ScaleY:" + $"{ScaleX},{ScaleY}");
+                Output?.Invoke(this, "Device Bounds:" + TouchpadDevice);
 
-            IsActive = true;
+                IsActive = true;
+            }
         }
 
         private double ScaleX { set; get; }

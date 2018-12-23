@@ -23,7 +23,6 @@ namespace SynAP
             catch (COMException)
             {
                 IsAvailable = false;
-                Output?.Invoke(this, "API unavailable. Please install Synaptics Touchpad drivers.");
             }
         }
 

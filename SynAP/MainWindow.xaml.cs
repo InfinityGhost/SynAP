@@ -52,6 +52,11 @@ namespace SynAP
             TouchpadMapArea.BackgroundArea = TouchpadRes;
             ScreenMapArea.ForegroundArea = Config.Screen;
             TouchpadMapArea.ForegroundArea = Config.Touchpad;
+
+            if (API.IsAvailable)
+                Driver.Start();
+            else
+                Console.Log(API, "API is unavailable. Please install Synaptics Pointing Device drivers.");
         }
 
         #region Properties
@@ -212,8 +217,20 @@ namespace SynAP
             }));
         }
 
-        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        private async void Window_StateChanged(object sender, EventArgs e)
         {
+            await Task.Delay(1); // This fixes the window property not being updated in time
+            Window_SizeChanged();
+        }
+
+        private void Window_SizeChanged(object sender = null, EventArgs e = null)
+        {
+            if (SettingsPanel.ActualHeight >= 50)
+            {
+                ScreenBoundsGrid.Height = (SettingsPanel.ActualHeight - 50) / 2;
+                TouchpadBoundsGrid.Height = (SettingsPanel.ActualHeight - 50) / 2;
+            }
+
             if (IsLoaded)
             {
                 ScreenMapArea.UpdateCanvas();
@@ -221,10 +238,7 @@ namespace SynAP
             }
         }
 
-        private void ShowAbout(object sender = null, EventArgs e = null)
-        {
-            new Windows.AboutBox().Show();
-        }
+        private void ShowAbout(object sender = null, EventArgs e = null) => new Windows.AboutBox().Show();
 
         #endregion
 
@@ -239,5 +253,6 @@ namespace SynAP
         }
 
         #endregion
+        
     }
 }
