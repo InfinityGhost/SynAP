@@ -34,6 +34,9 @@ namespace SynAP
         {
             Console?.Log("Window loaded.");
             Config = LoadDefaultConfig();
+
+            NotifyIcon = new NotifyIcon();
+            NotifyIcon.ShowWindow += NotifyIcon_ShowWindow;
             
             API = new API();
             API.Output += Console.Log;
@@ -58,6 +61,12 @@ namespace SynAP
                 Console.Log(API, "API is unavailable. Please install Synaptics Pointing Device drivers.");
         }
 
+        private void NotifyIcon_ShowWindow(object sender, EventArgs e)
+        {
+            this.Show();
+            WindowState = WindowState.Normal;
+        }
+
         #region Properties
 
         private Area DesktopRes { get; set; }
@@ -68,6 +77,8 @@ namespace SynAP
 
         private Screen Screen { get; set; }
         private Touchpad Touchpad { get; set; }
+
+        private NotifyIcon NotifyIcon { get; set; }
 
         #endregion
 
@@ -226,6 +237,23 @@ namespace SynAP
         {
             await Task.Delay(1); // This fixes the window property not being updated in time
             Window_SizeChanged();
+
+            switch (WindowState)
+            {
+                case WindowState.Minimized:
+                    {
+                        ShowInTaskbar = false;
+                        NotifyIcon.Visible = true;
+                        Hide();
+                        break;
+                    }
+                case WindowState.Normal:
+                    {
+                        ShowInTaskbar = true;
+                        NotifyIcon.Visible = false;
+                        break;
+                    }
+            }
         }
 
         private void Window_SizeChanged(object sender = null, EventArgs e = null)

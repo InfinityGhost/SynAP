@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Interop.SYNCOMLib">
       <HintPath>..\API\Interop.SYNCOMLib.dll</HintPath>
@@ -69,6 +72,7 @@
     <Compile Include="Devices\Screen.cs" />
     <Compile Include="Devices\Touchpad.cs" />
     <Compile Include="Driver.cs" />
+    <Compile Include="NotifyIcon.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Tools\ConvertHelper.cs" />
     <Compile Include="Tools\Info.cs" />
@@ -137,6 +141,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
