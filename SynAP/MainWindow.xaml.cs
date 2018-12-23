@@ -61,12 +61,6 @@ namespace SynAP
                 Console.Log(API, "API is unavailable. Please install Synaptics Pointing Device drivers.");
         }
 
-        private void NotifyIcon_ShowWindow(object sender, EventArgs e)
-        {
-            this.Show();
-            WindowState = WindowState.Normal;
-        }
-
         #region Properties
 
         private Area DesktopRes { get; set; }
@@ -272,6 +266,12 @@ namespace SynAP
         }
 
         private void ShowAbout(object sender = null, EventArgs e = null) => new Windows.AboutBox().Show();
+
+        private void NotifyIcon_ShowWindow(object sender, EventArgs e)
+        {
+            this.Show();
+            WindowState = WindowState.Normal;
+        }
 
         #endregion
 
