@@ -28,7 +28,13 @@ namespace SynAP.Windows
         #region Discord Tag Context Menu
 
         void CopyTagButton(object sender, RoutedEventArgs e) => Clipboard.SetText((string)DiscordTag.Content);
-            
+
+        #endregion
+
+        #region Version Context Menu
+
+        void ChangeLogButton(object sender, RoutedEventArgs e) => Process.Start(Website.Content + @"/releases/tag/v" + Version.Content);
+
         #endregion
 
         #region Website Context Menu

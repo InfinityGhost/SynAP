@@ -72,7 +72,13 @@
                 </GroupBox>
 
                 <GroupBox Header="Version">
-                    <Label x:Name="Version"/>
+                    <Label x:Name="Version">
+                        <Label.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Open changelog" Click="ChangeLogButton"/>
+                            </ContextMenu>
+                        </Label.ContextMenu>
+                    </Label>
                 </GroupBox>
 
                 <GroupBox Header="Website">
