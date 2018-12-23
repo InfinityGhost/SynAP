@@ -81,7 +81,6 @@
                                             <MenuItem Header="Center vertically" Click="CenterVertical" Tag="Touchpad"/>
                                         </ContextMenu>
                                     </control:MapArea.ContextMenu>
-
                                 </control:MapArea>
                                 <GroupBox Header="Touchpad Settings" Margin="0,0,0,72" HorizontalAlignment="Right" Padding="2">
                                     <StackPanel>
@@ -126,6 +125,11 @@
                                 </Border>
                             </Grid>
                         </GroupBox>
+                        <Grid VerticalAlignment="Bottom" Height="44">
+                            <Button x:Name="StartButton" Content="Start" Click="StartDriverButton"
+                                VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                Width="100" Height="24"/>
+                        </Grid>
                     </StackPanel>
                 </Grid>
             </TabItem>

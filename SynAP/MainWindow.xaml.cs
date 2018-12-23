@@ -53,9 +53,8 @@ namespace SynAP
             ScreenMapArea.ForegroundArea = Config.Screen;
             TouchpadMapArea.ForegroundArea = Config.Touchpad;
 
-            if (API.IsAvailable)
-                Driver.Start();
-            else
+            StartButton.IsEnabled = API.IsAvailable;
+            if (!API.IsAvailable)
                 Console.Log(API, "API is unavailable. Please install Synaptics Pointing Device drivers.");
         }
 
@@ -94,6 +93,12 @@ namespace SynAP
         private void UpdateScreen(object sender = null, EventArgs e = null)
         {
             ScreenMapArea.ForegroundArea = Config.Screen;
+
+            if (Driver.IsActive)
+            {
+                Driver.ScreenArea = Config.Screen;
+                Driver.TouchpadArea = Config.Touchpad;
+            }
         }
 
         private void UpdateTouchpad(object sender = null, TextChangedEventArgs e = null)
@@ -227,8 +232,8 @@ namespace SynAP
         {
             if (SettingsPanel.ActualHeight >= 50)
             {
-                ScreenBoundsGrid.Height = (SettingsPanel.ActualHeight - 50) / 2;
-                TouchpadBoundsGrid.Height = (SettingsPanel.ActualHeight - 50) / 2;
+                ScreenBoundsGrid.Height = (SettingsPanel.ActualHeight - 94) / 2;
+                TouchpadBoundsGrid.Height = (SettingsPanel.ActualHeight - 94) / 2;
             }
 
             if (IsLoaded)
