@@ -20,13 +20,21 @@ namespace SynAP.Windows
     /// </summary>
     public partial class TouchpadProperties : Window
     {
-        public TouchpadProperties()
+        public TouchpadProperties(Touchpad touchpad, API api)
         {
             InitializeComponent();
+            device = touchpad;
+            API = api;
         }
 
-        public Touchpad Touchpad;
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var bounds = device.Bounds;
+            Width.Content = bounds.Width + " px";
+            Height.Content = bounds.Height + " px";
+        }
 
-
+        private API API;
+        private Touchpad device;
     }
 }

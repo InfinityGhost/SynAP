@@ -273,6 +273,11 @@ namespace SynAP
             WindowState = WindowState.Normal;
         }
 
+        private void TouchpadPropertiesWindow(object sender = null, EventArgs e = null)
+        {
+            new Windows.TouchpadProperties(Touchpad, API).Show();
+        }
+
         #endregion
 
         #region INotifyPropertyChanged

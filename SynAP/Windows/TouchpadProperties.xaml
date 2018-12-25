@@ -7,32 +7,45 @@
         xmlns:local="clr-namespace:SynAP.Windows"
         mc:Ignorable="d"
         Title="Your Touchpad"
-        Width="400" Height="400">
+        Width="400" Height="400"
+        Loaded="Window_Loaded"
+        Topmost="True" WindowStartupLocation="CenterScreen"
+        SizeToContent="Height">
     <Window.Resources>
         <Style TargetType="GroupBox">
-            
-        </Style>
-        <Style TargetType="TextBlock">
-            <Setter Property="MinHeight" Value="24"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="5,0,5,0"/>
         </Style>
         <Style TargetType="Label">
-            <Setter Property="MinHeight" Value="18"/>
+            <Setter Property="MinHeight" Value="24"/>
         </Style>
     </Window.Resources>
-        
+
     <Grid>
-        <Grid VerticalAlignment="Top" Height="50">
-            <Label Content="Your Touchpad"
+        <StackPanel Margin="0,0,0,5">
+            <Grid VerticalAlignment="Top" Height="50">
+                <Label Content="Your Touchpad"
                    HorizontalAlignment="Center" VerticalAlignment="Center"
                    FontSize="18" FontWeight="Light"/>
-        </Grid>
-
-        <StackPanel Margin="0,50,0,0">
-            <Image Source="/SynAP;component/Resources/TouchpadDevice.png" Height="100"/>
-            <GroupBox Header="Resolution">
-                <Label x:Name="ResolutionBox"/>
-            </GroupBox>
+            </Grid>
+            <StackPanel Height="120">
+                <Grid HorizontalAlignment="Center" Height="100">
+                    <Image Source="/SynAP;component/Resources/TouchpadDevice.png" VerticalAlignment="Top"/>
+                    <Label x:Name="Height" Content="Height" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,-30,0"
+                           RenderTransformOrigin="0.5,0.5">
+                        <Label.RenderTransform>
+                            <TransformGroup>
+                                <RotateTransform Angle="270"/>
+                            </TransformGroup>
+                        </Label.RenderTransform>
+                    </Label>
+                </Grid>
+                <Label x:Name="Width" Content="Width" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,-6,0,0"/>
+            </StackPanel>
+            <StackPanel Margin="5,5,5,5">
+                <GroupBox Header="Name">
+                    <Label x:Name="Name"/>
+                </GroupBox>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

@@ -21,6 +21,7 @@
                 <MenuItem Header="Save defaults"/>
                 <MenuItem Header="Exit"/>
             </MenuItem>
+            <MenuItem Header="Touchpad" Click="TouchpadPropertiesWindow"/>
         </Menu>
         <TabControl Margin="0,18">
             <TabItem Header="Settings">
