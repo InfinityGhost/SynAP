@@ -1,4 +1,5 @@
 ﻿using SynAP.Devices;
+using SYNCTRLLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,9 +30,21 @@ namespace SynAP.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var bounds = device.Bounds;
-            Width.Content = bounds.Width + " px";
-            Height.Content = bounds.Height + " px";
+            if (API.IsAvailable)
+            {
+                var bounds = device.Bounds;
+                Width.Content = bounds.Width + " px";
+                Height.Content = bounds.Height + " px";
+
+                Status.Content = API.GetProperty(SynDeviceProperty.SP_DeviceStatus);
+                DPI.Content = $"{API.GetProperty(SynDeviceProperty.SP_XDPI)}x{API.GetProperty(SynDeviceProperty.SP_YDPI)}";
+            }
+            else
+            {
+                Width.Content = "No touchpad is detected.";
+                if (!System.Diagnostics.Debugger.IsAttached)
+                    PropertiesList.Content = null;
+            }
         }
 
         private API API;
