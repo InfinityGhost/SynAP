@@ -42,12 +42,12 @@
         </Grid.RenderTransform>
         <Grid VerticalAlignment="Top" Height="50">
             <Label HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Content="InfinityBot" FontFamily="Consolas" FontSize="18"/>
+                   Content="SynAP" FontSize="18" FontWeight="ExtraLight"/>
         </Grid>
         <Grid Margin="0,50,0,50">
             <Image x:Name="Image" HorizontalAlignment="Left"
                    Width="130" Margin="5,0"
-                   Source="{x:Null}"/>
+                   Source="/SynAP;component/Resources/Icon.png"/>
             <StackPanel x:Name="PropertyPanel" Margin="140,0,5,0">
                 <StackPanel.Resources>
                     <Style TargetType="GroupBox">
