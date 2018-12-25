@@ -5,3 +5,6 @@ So for some reason I decided to write an absolute positioning driver for touchpa
 * .NET Framework 4.6.1 or newer
 * Synaptics Touchpad
 * Synaptics Pointing Device Drivers
+### Screenshots
+
+![Screenshot](https://i.imgur.com/xjCS4gl.png)
