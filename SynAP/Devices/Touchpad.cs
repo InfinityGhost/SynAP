@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SynAP.Devices
 {
-    class Touchpad
+    public class Touchpad
     {
         public Touchpad()
         {

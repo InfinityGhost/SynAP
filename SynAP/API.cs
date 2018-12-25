@@ -8,7 +8,7 @@ using SYNCTRLLib;
 
 namespace SynAP
 {
-    class API
+    public class API
     {   
         public API()
         {

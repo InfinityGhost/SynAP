@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SynAP.Devices;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,5 +24,9 @@ namespace SynAP.Windows
         {
             InitializeComponent();
         }
+
+        public Touchpad Touchpad;
+
+
     }
 }
