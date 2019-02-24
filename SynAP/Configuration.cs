@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
+﻿using System.IO;
 using static SynAP.Tools.ReadHelper;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Xml.Serialization;
 
 namespace SynAP
 {
+    [XmlRoot("SynAP Configuration", IsNullable = true)]
     public class Configuration : INotifyPropertyChanged
     {
         public Configuration()
@@ -17,8 +14,6 @@ namespace SynAP
             Touchpad = new Area();
             Screen = new Area();
         }
-
-        public Configuration(string path) => Load(path);
 
         public Configuration(Area touchpad, Area screen)
         {
@@ -61,25 +56,18 @@ namespace SynAP
 
         #region File Management
 
-        private readonly string Splitter = ":";
-
-        public void Load(string path)
-        {
-            var file = File.ReadAllLines(path);
-            Touchpad = new Area(file.GetProperty("Touchpad"));
-            Screen = new Area(file.GetProperty("Desktop"));
-            LockAspectRatio = file.GetProperty("LockAspectRatio").ToBool();
-        }
+        private static XmlSerializer Serializer = new XmlSerializer(typeof(Configuration));
 
         public void Save(string path)
         {
-            string[] vs =
-            {
-                "Touchpad" + Splitter + Touchpad,
-                "Desktop" + Splitter + Screen,
-                "LockAspectRatio" + Splitter + LockAspectRatio,
-            };
-            File.WriteAllLines(path, vs);
+            TextWriter tw = new StreamWriter(path);
+            Serializer.Serialize(tw, this);
+        }
+
+        public static Configuration Read(string path)
+        {
+            using (var sr = new StreamReader(path))
+                return (Configuration)Serializer.Deserialize(sr);
         }
 
         #endregion

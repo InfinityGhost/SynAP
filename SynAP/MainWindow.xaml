@@ -18,7 +18,7 @@
                 <MenuItem Header="About" Click="ShowAbout"/>
                 <MenuItem Header="Load settings..." Click="LoadDialog"/>
                 <MenuItem Header="Save settings..." Click="SaveDialog"/>
-                <MenuItem Header="Save defaults"/>
+                <MenuItem Header="Save defaults" Click="SaveDefaults"/>
                 <MenuItem Header="Exit"/>
             </MenuItem>
         </Menu>

@@ -167,7 +167,7 @@ namespace SynAP
         {
             try
             {
-                return new Configuration(Info.DefaultConfigPath);
+                return Configuration.Read(Info.DefaultConfigPath);
             }
             catch
             {
@@ -192,7 +192,7 @@ namespace SynAP
             {
                 try
                 {
-                    Config = new Configuration(dialog.FileName);
+                    Config = Configuration.Read(dialog.FileName);
                 }
                 catch
                 {
@@ -213,6 +213,11 @@ namespace SynAP
             {
                 Config.Save(dialog.FileName);
             }
+        }
+
+        private void SaveDefaults(object sender = null, EventArgs e = null)
+        {
+            SaveDefaultConfig();
         }
 
         #endregion
