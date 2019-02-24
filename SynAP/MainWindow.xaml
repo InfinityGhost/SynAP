@@ -25,112 +25,114 @@
         <TabControl Margin="0,18">
             <TabItem Header="Settings">
                 <Grid x:Name="SettingsPanel">
-                    <StackPanel>
-                        <GroupBox Header="Screen Bounds">
-                            <Grid x:Name="ScreenBoundsGrid">
-                                <control:MapArea x:Name="ScreenMapArea" Margin="0,0,0,72" ForegroundArea="{Binding Path=Config.Screen, Mode=TwoWay}">
-                                    <control:MapArea.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Center the area" Click="CenterArea" Tag="Screen"/>
-                                            <MenuItem Header="Center horizontally" Click="CenterHorizontal" Tag="Screen"/>
-                                            <MenuItem Header="Center vertically" Click="CenterVertical" Tag="Screen"/>
-                                        </ContextMenu>
-                                    </control:MapArea.ContextMenu>
-                                </control:MapArea>
-                                <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderThickness="1" 
-                                        VerticalAlignment="Bottom" HorizontalAlignment="Center"
-                                        Padding="0,0,0,2">
-                                    <StackPanel Orientation="Horizontal" DataContext="{Binding Path=Config.Screen, Mode=TwoWay}">
-                                        <StackPanel.Resources>
-                                            <Style TargetType="GroupBox">
-                                                <Setter Property="Height" Value="50"/>
-                                                <Setter Property="Margin" Value="2.5,0"/>
-                                            </Style>
-                                            <Style TargetType="TextBox">
-                                                <Setter Property="VerticalAlignment" Value="Center"/>
-                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                                                <Setter Property="Height" Value="24"/>
-                                                <Setter Property="Width" Value="100"/>
-                                                <EventSetter Event="TextChanged" Handler="UpdateScreen"/>
-                                            </Style>
-                                        </StackPanel.Resources>
-                                        <GroupBox Header="Width">
-                                            <TextBox Text="{Binding Path=Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                        </GroupBox>
-                                        <GroupBox Header="Height">
-                                            <TextBox Text="{Binding Path=Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                        </GroupBox>
-                                        <GroupBox Header="Horizontal Offset">
-                                            <TextBox Text="{Binding Path=Position.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                        </GroupBox>
-                                        <GroupBox Header="Vertical Offset">
-                                            <TextBox Text="{Binding Path=Position.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                        </GroupBox>
-
-                                    </StackPanel>
-                                </Border>
-                            </Grid>
-                        </GroupBox>
-                        <GroupBox Header="Touchpad Bounds">
-                            <Grid x:Name="TouchpadBoundsGrid">
-                                <control:MapArea x:Name="TouchpadMapArea" Margin="0,0,0,72" ForegroundArea="{Binding Path=Config.Touchpad}">
-                                    <control:MapArea.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="Center the area" Click="CenterArea" Tag="Touchpad"/>
-                                            <MenuItem Header="Center horizontally" Click="CenterHorizontal" Tag="Touchpad"/>
-                                            <MenuItem Header="Center vertically" Click="CenterVertical" Tag="Touchpad"/>
-                                        </ContextMenu>
-                                    </control:MapArea.ContextMenu>
-                                </control:MapArea>
-                                <GroupBox Header="Touchpad Settings" Margin="0,0,0,72" HorizontalAlignment="Right" Padding="2">
-                                    <StackPanel>
-                                        <StackPanel.Resources>
-                                            <Style TargetType="CheckBox">
-                                                <Setter Property="Margin" Value="2.5"/>
-                                            </Style>
-                                        </StackPanel.Resources>
-                                        <CheckBox Content="Lock aspect ratio" IsChecked="{Binding Config.LockAspectRatio}"/>
-                                    </StackPanel>
-                                </GroupBox>
-                                <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderThickness="1" 
-                                        VerticalAlignment="Bottom" HorizontalAlignment="Center"
-                                        Padding="0,0,0,2">
-                                    <StackPanel Orientation="Horizontal" DataContext="{Binding Path=Config.Touchpad, Mode=TwoWay}">
-                                        <StackPanel.Resources>
-                                            <Style TargetType="GroupBox">
-                                                <Setter Property="Height" Value="50"/>
-                                                <Setter Property="Margin" Value="2.5,0"/>
-                                            </Style>
-                                            <Style TargetType="TextBox">
-                                                <Setter Property="VerticalAlignment" Value="Center"/>
-                                                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                                                <Setter Property="Height" Value="24"/>
-                                                <Setter Property="Width" Value="100"/>
-                                                <EventSetter Event="TextChanged" Handler="UpdateTouchpad"/>
-                                            </Style>
-                                        </StackPanel.Resources>
-                                        <GroupBox Header="Width">
-                                            <TextBox x:Name="TouchpadWidthBox" Text="{Binding Path=Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                        </GroupBox>
-                                        <GroupBox Header="Height">
-                                            <TextBox x:Name="TouchpadHeightBox" Text="{Binding Path=Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                        </GroupBox>
-                                        <GroupBox Header="Horizontal Offset">
-                                            <TextBox Text="{Binding Path=Position.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                        </GroupBox>
-                                        <GroupBox Header="Vertical Offset">
-                                            <TextBox Text="{Binding Path=Position.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                        </GroupBox>
-                                    </StackPanel>
-                                </Border>
-                            </Grid>
-                        </GroupBox>
-                        <Grid VerticalAlignment="Bottom" Height="44">
-                            <Button x:Name="StartButton" Content="Start" Click="StartDriverButton"
-                                VerticalAlignment="Center" HorizontalAlignment="Center" 
-                                Width="100" Height="24"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="50"/>
+                    </Grid.RowDefinitions>
+                    <GroupBox Grid.Row="0" Header="Screen Bounds">
+                        <Grid>
+                            <control:MapArea x:Name="ScreenMapArea" Margin="0,0,0,72" ForegroundArea="{Binding Path=Config.Screen, Mode=TwoWay}">
+                                <control:MapArea.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Center the area" Click="CenterArea" Tag="Screen"/>
+                                        <MenuItem Header="Center horizontally" Click="CenterHorizontal" Tag="Screen"/>
+                                        <MenuItem Header="Center vertically" Click="CenterVertical" Tag="Screen"/>
+                                    </ContextMenu>
+                                </control:MapArea.ContextMenu>
+                            </control:MapArea>
+                            <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderThickness="1" 
+                                    VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                                    Padding="0,0,0,2">
+                                <StackPanel Orientation="Horizontal" DataContext="{Binding Path=Config.Screen, Mode=TwoWay}">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="GroupBox">
+                                            <Setter Property="Height" Value="50"/>
+                                            <Setter Property="Margin" Value="2.5,0"/>
+                                        </Style>
+                                        <Style TargetType="TextBox">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                            <Setter Property="Height" Value="24"/>
+                                            <Setter Property="Width" Value="100"/>
+                                            <EventSetter Event="TextChanged" Handler="UpdateScreen"/>
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    <GroupBox Header="Width">
+                                        <TextBox Text="{Binding Path=Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </GroupBox>
+                                    <GroupBox Header="Height">
+                                        <TextBox Text="{Binding Path=Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </GroupBox>
+                                    <GroupBox Header="Horizontal Offset">
+                                        <TextBox Text="{Binding Path=Position.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </GroupBox>
+                                    <GroupBox Header="Vertical Offset">
+                                        <TextBox Text="{Binding Path=Position.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </GroupBox>
+                                </StackPanel>
+                            </Border>
                         </Grid>
-                    </StackPanel>
+                    </GroupBox>
+                    <GroupBox Grid.Row="1" Header="Touchpad Bounds">
+                        <Grid>
+                            <control:MapArea x:Name="TouchpadMapArea" Margin="0,0,0,72" ForegroundArea="{Binding Path=Config.Touchpad}">
+                                <control:MapArea.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Center the area" Click="CenterArea" Tag="Touchpad"/>
+                                        <MenuItem Header="Center horizontally" Click="CenterHorizontal" Tag="Touchpad"/>
+                                        <MenuItem Header="Center vertically" Click="CenterVertical" Tag="Touchpad"/>
+                                    </ContextMenu>
+                                </control:MapArea.ContextMenu>
+                            </control:MapArea>
+                            <GroupBox Header="Touchpad Settings" Margin="0,0,0,72" HorizontalAlignment="Right" Padding="2">
+                                <StackPanel>
+                                    <StackPanel.Resources>
+                                        <Style TargetType="CheckBox">
+                                            <Setter Property="Margin" Value="2.5"/>
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    <CheckBox Content="Lock aspect ratio" IsChecked="{Binding Config.LockAspectRatio}"/>
+                                </StackPanel>
+                            </GroupBox>
+                            <Border BorderBrush="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" BorderThickness="1" 
+                                    VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                                    Padding="0,0,0,2">
+                                <StackPanel Orientation="Horizontal" DataContext="{Binding Path=Config.Touchpad, Mode=TwoWay}">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="GroupBox">
+                                            <Setter Property="Height" Value="50"/>
+                                            <Setter Property="Margin" Value="2.5,0"/>
+                                        </Style>
+                                        <Style TargetType="TextBox">
+                                            <Setter Property="VerticalAlignment" Value="Center"/>
+                                            <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                            <Setter Property="Height" Value="24"/>
+                                            <Setter Property="Width" Value="100"/>
+                                            <EventSetter Event="TextChanged" Handler="UpdateTouchpad"/>
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    <GroupBox Header="Width">
+                                        <TextBox x:Name="TouchpadWidthBox" Text="{Binding Path=Width, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </GroupBox>
+                                    <GroupBox Header="Height">
+                                        <TextBox x:Name="TouchpadHeightBox" Text="{Binding Path=Height, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </GroupBox>
+                                    <GroupBox Header="Horizontal Offset">
+                                        <TextBox Text="{Binding Path=Position.X, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </GroupBox>
+                                    <GroupBox Header="Vertical Offset">
+                                        <TextBox Text="{Binding Path=Position.Y, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    </GroupBox>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </GroupBox>
+                    <Grid Grid.Row="3">
+                        <Button x:Name="StartButton" Content="Start" Click="StartDriverButton"
+                            VerticalAlignment="Center" HorizontalAlignment="Center" 
+                            Width="100" Height="24"/>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Console">

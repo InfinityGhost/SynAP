@@ -257,12 +257,6 @@ namespace SynAP
 
         private void Window_SizeChanged(object sender = null, EventArgs e = null)
         {
-            if (SettingsPanel.ActualHeight >= 50)
-            {
-                ScreenBoundsGrid.Height = (SettingsPanel.ActualHeight - 94) / 2;
-                TouchpadBoundsGrid.Height = (SettingsPanel.ActualHeight - 94) / 2;
-            }
-
             if (IsLoaded)
             {
                 ScreenMapArea.UpdateCanvas();

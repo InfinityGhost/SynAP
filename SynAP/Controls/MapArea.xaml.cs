@@ -78,7 +78,7 @@ namespace SynAP.Controls
 
             foreground = new Rectangle
             {
-                Fill = Brushes.SkyBlue
+                Fill = SystemParameters.WindowGlassBrush
             };
 
             AreaCanvas.Children.Add(foreground);
