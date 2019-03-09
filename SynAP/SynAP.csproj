@@ -69,6 +69,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="API.cs" />
+    <Compile Include="Controls\Resource\AreaDrag.cs" />
+    <Compile Include="Controls\Resource\ScaleTool.cs" />
     <Compile Include="Devices\Screen.cs" />
     <Compile Include="Devices\Touchpad.cs" />
     <Compile Include="Driver.cs" />

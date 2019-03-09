@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SynAP.Controls.Resource;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -41,7 +42,6 @@ namespace SynAP.Controls
                 SetValue(ForegroundAreaProperty, value);
                 UpdateCanvas();
             }
-
             get => (Area)GetValue(ForegroundAreaProperty);
         }
 
@@ -53,12 +53,13 @@ namespace SynAP.Controls
                 SetValue(BackgroundAreaProperty, value);
                 UpdateCanvas();
             }
-
             get => (Area)GetValue(BackgroundAreaProperty);
         }
 
         private Rectangle foreground;
         private Rectangle background;
+
+        private AreaDrag AreaDrag;
 
         #endregion
 
@@ -93,35 +94,53 @@ namespace SynAP.Controls
             AreaCanvas.Children.Add(background);
 
             Output?.Invoke(this, "Canvas objects created.");
+
+            AreaCanvas.MouseDown += AreaMouseDown;
+            AreaCanvas.MouseMove += AreaMouseMove;
+        }
+
+        private void AreaMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            AreaDrag = new AreaDrag(foreground, e.GetPosition(AreaCanvas));
+            AreaDrag.MouseUp += AreaDrag_MouseUp;
+        }
+
+        private void AreaDrag_MouseUp(object sender, System.Windows.Point e)
+        {
+            if (AreaDrag != null)
+            {
+                ForegroundArea.Position.X += Math.Round(e.X / CanvasScale.Value);
+                ForegroundArea.Position.Y += Math.Round(e.Y / CanvasScale.Value);
+            }
+        }
+
+        private void AreaMouseMove(object sender, MouseEventArgs e)
+        {
+            if (AreaDrag != null && AreaDrag.IsDragging)
+                AreaDrag.TranslatePosition = e.GetPosition(AreaCanvas);
         }
 
         public void UpdateCanvas()
         {
             try
             {
-                double scaleX = this.ActualWidth / BackgroundArea.Width;
-                double scaleY = this.ActualHeight / BackgroundArea.Height;
-                double scale = scaleX;
-                if (scaleX > scaleY)
-                    scale = scaleY;
-
                 double width = ForegroundArea.Width;
                 double height = ForegroundArea.Height;
                 Point position = ForegroundArea.Position;
 
                 Point centerOffset = new Point
                 {
-                    X = this.ActualWidth / 2.0 - BackgroundArea.Width * scale / 2.0,
-                    Y = this.ActualHeight / 2.0 - BackgroundArea.Height * scale / 2.0,
+                    X = this.ActualWidth / 2.0 - BackgroundArea.Width * CanvasScale.Value / 2.0,
+                    Y = this.ActualHeight / 2.0 - BackgroundArea.Height * CanvasScale.Value / 2.0,
                 };
 
-                background.Width = BackgroundArea.Width * scale;
-                background.Height = BackgroundArea.Height * scale;
+                background.Width = BackgroundArea.Width * CanvasScale.Value;
+                background.Height = BackgroundArea.Height * CanvasScale.Value;
                 MoveObject(background, centerOffset);
 
-                foreground.Width = ForegroundArea.Width * scale;
-                foreground.Height = ForegroundArea.Height * scale;
-                MoveObject(foreground, new Point(centerOffset.X + ForegroundArea.Position.X * scale, centerOffset.Y + ForegroundArea.Position.Y * scale));
+                foreground.Width = ForegroundArea.Width * CanvasScale.Value;
+                foreground.Height = ForegroundArea.Height * CanvasScale.Value;
+                MoveObject(foreground, new Point(centerOffset.X + ForegroundArea.Position.X * CanvasScale.Value, centerOffset.Y + ForegroundArea.Position.Y * CanvasScale.Value));
 
                 Output?.Invoke(this, "Canvas updated.");
             }
@@ -138,10 +157,6 @@ namespace SynAP.Controls
             return Task.CompletedTask;
         }
 
-        public Task LazyAreaUpdate(Area foreground)
-        {
-            ForegroundArea = foreground;
-            return Task.CompletedTask;
-        }
+        private ScaleTool CanvasScale => new ScaleTool(ActualWidth, ActualHeight, BackgroundArea.Width, BackgroundArea.Height);
     }
 }
